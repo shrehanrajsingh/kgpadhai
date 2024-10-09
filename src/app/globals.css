@@ -14,10 +14,19 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.font-black {
+  font-weight: 900;
+  color: #8e8e8e;
 }
 
 @layer utilities {
