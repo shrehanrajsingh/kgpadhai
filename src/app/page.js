@@ -1,16 +1,32 @@
 import Image from "next/image";
 
-import Course1 from "./assets/course1.png";
-import Course2 from "./assets/course2.png";
-import Course3 from "./assets/course3.png";
-
 import Testimonial1 from "./assets/testimonial1.jpeg";
 import Testimonial2 from "./assets/testimonial2.jpeg";
 import Testimonial3 from "./assets/testimonial3.jpeg";
 
+const courses=[
+  {
+    slug:"course/learnjava",
+    coursename:"Learn Java",
+    image:"/assets/course1.png",
+    description:"Learn Java Description",
+  },
+  {
+    slug:"course/learnwebdev",
+    coursename:"Learn WebDev",
+    image:"/assets/course2.png",
+    description:"Learn WebDev Description",
+  },
+  {
+    slug:"course/learndsa",
+    coursename:"Learn Data Structures & Algorithms",
+    image:"/assets/course3.png",
+    description:"Learn DSA",
+  }
+]
 export default function Home() {
   return (
-    <div>
+    <div >
       <nav className="flex justify-between items-center h-16 bg-white text-black relative shadow-sm font-mono" role="navigation">
         <a href="/" className="pl-8">Logo</a>
 
@@ -46,29 +62,23 @@ export default function Home() {
         <h1 className="text-5xl font-black">Courses</h1>
         <p className="lg:w-2/3 md:w-3/4 sm:w-full text-xl text-center font-black mt-4">Choose from a wide range of courses</p>
         <div className="flex flex-wrap justify-center mt-16">
-          <div className="m-6 shadow-lg bg-white" style={{ width: "300px" }}>
-            <Image src={Course1} alt="course1" width={300} height={200} />
-            <div className="p-4">
-              <span className="font-bold">Course 1</span>
-              <span className="block text-gray-500 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+          
+        {Object.keys(courses).map((key,index) => {
+        return (
+          <div className="m-6 shadow-lg bg-white" key={key} style={{ width: "300px" }}>
+            <Image src={courses[index]['image']} alt="course{index}" width={300} height={200} />
+            <div className="p-4" key={index}>
+              <span className="font-bold text-gray-700">{courses[index]['coursename']}</span>
+              <span className="block text-gray-500 text-sm">{courses[index]['description']}</span>
+              <a href={courses[index]['slug']} className="py-1 px-5 bg-green-700 text-white rounded-full text-md hover:bg-green-400 transition duration-300 ease-in-out flex items-center" style={{width:'40%'}}>Explore</a>
             </div>
           </div>
-          <div className="m-6 shadow-lg bg-white" style={{ width: "300px" }}>
-            <Image src={Course2} alt="course2" width={300} height={200} />
-            <div className="p-4">
-              <span className="font-bold">Course 2</span>
-              <span className="block text-gray-500 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
-            </div>
-          </div>
-          <div className="m-6 shadow-lg bg-white" style={{ width: "300px" }}>
-            <Image src={Course3} alt="course3" width={300} height={200} />
-            <div className="p-4">
-              <span className="font-bold">Course 3</span>
-              <span className="block text-gray-500 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
-            </div>
-          </div>
+        )})
+    }
+
         </div>
       </div>
+
 
       <div className="flex flex-col justify-center items-center bg-gray-100 h-screen font-mono py-10" id="about">
         <h1 className="text-5xl font-black">About Us</h1>
