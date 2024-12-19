@@ -1,32 +1,6 @@
 import Image from "next/image";
 
-import Course1 from "./assets/course1.png";
-import Course2 from "./assets/course2.png";
-import Course3 from "./assets/course3.png";
-
-const courses = [
-    {
-        slug: "course/learnjava",
-        coursename: "Learn Java",
-        image: Course1,
-        description: "Learn Java Description",
-        link: '/course/learn-java'
-    },
-    {
-        slug: "course/learnwebdev",
-        coursename: "Learn WebDev",
-        image: Course2,
-        description: "Learn WebDev Description",
-        link: '/course/learn-webdev'
-    },
-    {
-        slug: "course/learndsa",
-        coursename: "Learn Data Structures & Algorithms",
-        image: Course3,
-        description: "Learn DSA",
-        link: '/course/learn-dsa'
-    }
-]
+import courses from '@/../courses.json'; // Adjust the path to your JSON file
 
 const Courses = () => {
     return (
@@ -41,7 +15,7 @@ const Courses = () => {
                 {Object.keys(courses).map((key) => {
                     return (<div className="max-w-sm bg-white text-black border m-4 border-gray-200 rounded-lg shadow">
                         <a href="#">
-                            <Image src={courses[key].image} alt={courses[0].coursename} width={400} height={200} />
+                            <img src={courses[key].image} alt={courses[0].coursename} width={400} height={200} />
                         </a>
                         <div className="p-5">
                             <a href="#">

@@ -1,16 +1,28 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
-
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import courses from '@/../courses.json'; // Adjust the path to your JSON file
 
 function CoursePage() {
+
+
 
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    const slug = pathname.split("/").pop();
+    const slug = pathname;;
     const query = Object.fromEntries(searchParams);
-
+  
+    // Find the course using the extracted slug
+    const course = courses.find(course => course.link === slug);
+  
+    
+    console.log(slug);
+    console.log(course);
+    
+    if (!course) {
+        return <div>{slug} Course not found</div>;
+    }
     return (
         <div className="min-h-screen bg-gray-100">
             <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
@@ -20,9 +32,9 @@ function CoursePage() {
                         <div className="absolute inset-0 bg-black opacity-50"></div>
                         <div className="relative z-10 px-8 py-16 flex flex-col justify-center h-full">
                             <h1 className="text-4xl font-bold text-white mb-4">
-                                {decodeURIComponent(slug)}
+                                {course.title}
                             </h1>
-                            <p className="text-xl text-gray-200">Master your skills with our comprehensive course</p>
+                            <p className="text-xl text-gray-200">{course.description}</p>
                         </div>
                     </div>
 
@@ -33,7 +45,7 @@ function CoursePage() {
                                 <section className="space-y-4">
                                     <h2 className="text-2xl font-semibold text-gray-800">Course Overview</h2>
                                     <p className="text-gray-600">
-                                        Learn from industry experts and gain practical experience through hands-on projects.
+                                        {course.description}
                                     </p>
                                 </section>
 
