@@ -1,3 +1,6 @@
+import SRSImage from './assets/shrehanrajsingh.jpeg';
+import HRDImage from './assets/harshrajdubey.jpeg';
+
 const links = [
     { name: 'Open roles', href: '#' },
     { name: 'Internship program', href: '#' },
@@ -16,13 +19,13 @@ const people = [
         name: 'Shrehan Raj Singh',
         role: 'Developer',
         imageUrl:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+            SRSImage.src,
     },
     {
         name: 'Harsh Raj Dubey',
         role: 'Developer',
         imageUrl:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+            HRDImage.src,
     },
 ]
 
@@ -93,8 +96,11 @@ function AboutUs() {
                 <div className="mx-auto max-w-2xl lg:mx-0">
                     <h2 className="text-5xl font-semibold tracking-tight text-white sm:text-7xl">About us</h2>
                     <p className="mt-8 text-pretty text-lg font-medium text-gray-300 sm:text-xl/8">
-                        Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-                        fugiat veniam occaecat fugiat.
+                        At KGPadhai, we believe that learning should be accessible,
+                        flexible, and empowering.
+                        Our platform connects learners with expert instructors from around the world,
+                        offering a wide range of courses in technology,
+                        business, creative arts, and personal development.
                     </p>
                 </div>
                 <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
