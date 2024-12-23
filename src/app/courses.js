@@ -11,7 +11,7 @@ const Courses = () => {
                 className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center"
             />
             <h2 className="text-5xl text-center font-semibold tracking-tight text-white sm:text-7xl">Courses</h2>
-            <div className="flex justify-center items-center font-mono py-10">
+            <div className="flex justify-center items-start font-mono py-10 ">
                 {Object.keys(courses).map((key) => {
                     return (<div className="max-w-sm bg-white text-black border m-4 border-gray-200 rounded-lg shadow">
                         <a href="#">

@@ -20,17 +20,17 @@ export default function Hero() {
 
 
     return (
-        <div>
+        <div style={{ height: '100vh' }}>
             <div style={{
                 backgroundImage: `url(${HeaderBG.src})`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
-                filter: 'blur(8px)',
+                // filter: 'blur(8px)',
                 position: 'absolute',
                 top: 0,
                 left: 0,
                 width: '100%',
-                height: '100%',
+                height: '100vh',
             }}></div>
             <header className="absolute inset-x-0 top-0 z-50">
                 <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
@@ -62,7 +62,7 @@ export default function Hero() {
                         ))}
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <a href="#" className="text-sm/6 font-semibold text-gray-900">
+                        <a href="/login" className="text-sm/6 font-semibold text-gray-900 bg-gray-50 px-3 py-2.5 rounded-lg hover:bg-gray-200 transition-colors">
                             Log in <span aria-hidden="true">&rarr;</span>
                         </a>
                     </div>
@@ -103,7 +103,7 @@ export default function Hero() {
                                 </div>
                                 <div className="py-6">
                                     <a
-                                        href="#"
+                                        href="/login"
                                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                                     >
                                         Log in
