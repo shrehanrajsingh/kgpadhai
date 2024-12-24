@@ -1,7 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import Cookies from 'js-cookie';
+import 'react-toastify/dist/ReactToastify.css';
 
 import SignupFormBG from '../assets/signup-form-bg.jpg';
 import SignupBG from '../assets/signup-bg.jpg';
@@ -13,10 +17,54 @@ export default function SignUp() {
         password: '',
         confirmPassword: ''
     });
+    const [error, setError] = useState('');
+    const router = useRouter();
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        const token = Cookies.get('token');
+        if (token) {
+            toast.success('You are already logged in');
+            router.push('/');
+        }
+    }, [router]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+
+        if (formData.password !== formData.confirmPassword) {
+            setError('Passwords do not match');
+            toast.error('Passwords do not match');
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/auth/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    password: formData.password,
+                }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                Cookies.set('token', data.token, { expires: 7 }); // Store token in cookie for 7 days
+                toast.success('Signup successful!');
+                // Redirect to the dashboard or home page after successful signup
+                router.push('/');
+            } else {
+                const data = await response.json();
+                setError(data.message || 'Signup failed');
+                toast.error(data.message || 'Signup failed');
+            }
+        } catch (error) {
+            setError('Error signing up');
+            toast.error('Error signing up');
+        }
     };
 
     return (
@@ -25,6 +73,7 @@ export default function SignUp() {
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
         }}>
+            <ToastContainer />
             <div className="absolute top-4 right-4 text-4xl font-bold text-white z-40 opacity-50">
                 KGPadhai
             </div>
@@ -110,6 +159,8 @@ export default function SignUp() {
                             />
                         </div>
                     </div>
+
+                    {error && <div className="text-red-500 text-sm">{error}</div>}
 
                     <div>
                         <button

@@ -6,16 +6,23 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "insert-sample-data": "node scripts/insertSampleData.js"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.1.5",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
     "i": "^0.3.7",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.2",
     "next": "^14.2.15",
     "npm": "^10.9.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-toastify": "^11.0.2",
     "sharp": "^0.33.5"
   },
   "devDependencies": {
@@ -24,6 +31,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2"
   }
 }

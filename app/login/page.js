@@ -1,6 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 import LoginBG from '../assets/login-bg.jpg';
 import IconGoogle from '../assets/icon-google.svg';
 import IconFacebook from '../assets/icon-facebook.svg';
@@ -8,13 +11,50 @@ import IconFacebook from '../assets/icon-facebook.svg';
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const router = useRouter();
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        const token = Cookies.get('token');
+        if (token) {
+            toast.success('You are already logged in');
+            router.push('/');
+        }
+    }, [router]);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        // Handle login logic here
+        // Example: Send a POST request to your login API endpoint
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                Cookies.set('token', data.token, { expires: 7 }); // Store token in cookie for 7 days
+                toast.success('Login successful!');
+                // Redirect to the dashboard or home page after successful login
+                router.push('/');
+            } else {
+                const data = await response.json();
+                setError(data.message || 'Login failed');
+                toast.error(data.message || 'Login failed');
+            }
+        } catch (error) {
+            setError('Error logging in');
+            toast.error('Error logging in');
+        }
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+            <ToastContainer />
             <div className="absolute inset-0 z-0">
                 <img
                     alt=""
@@ -85,6 +125,8 @@ export default function Login() {
                             </a>
                         </div>
                     </div>
+
+                    {error && <div className="text-red-500 text-sm">{error}</div>}
 
                     <div>
                         <button
